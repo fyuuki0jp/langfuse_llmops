@@ -1,6 +1,6 @@
 langfuse + langchainをdocker-composeとdevcontainerでいい感じに使うテンプレリポジトリ
 
-devcontainer側で3000番ポートを使いたい時はdocker-composeを書き換えること
+devcontainer側で3000番ポートを使いたい時はdocker-composeとdevcontainer.jsonのforwardPortsを任意のポート番号に書き換えること
 
 手順
 1. VSCodeで開く
