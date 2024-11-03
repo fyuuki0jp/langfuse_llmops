@@ -11,5 +11,6 @@ dependencies = [
     "langchain>=0.3.7",
     "langfuse>=2.53.3",
     "pillow>=11.0.0",
+    "python-dotenv>=1.0.1",
     "ruff>=0.7.2",
 ]

@@ -1,16 +1,23 @@
-import getpass
+from getpass import getpass
 import os
-import langfuse
-import langchain
+from uuid import uuid4
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langfuse.callback import CallbackHandler
+import dotenv
 
-if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = getpass("Provide your Google API Key")
+dotenv.load_dotenv(verbose=True)
 
-model = ChatGoogleGenerativeAI(model="gemini-1.5-pro")
+langfuse_handler = CallbackHandler(
+    public_key=os.environ["LANGFUSE_PUBLIC_KEY"], 
+    secret_key=os.environ["LANGFUSE_SECRET_KEY"],
+    host=os.environ["LANGFUSE_HOST"],
+    session_id=str(uuid4())[:8]
+)
 
 def main():
-    pass
+    model = ChatGoogleGenerativeAI(model="gemini-1.5-pro")
+    result = model.invoke("こんにちは", config={"callbacks": [langfuse_handler]})
+    print(result.content)
 
 if __name__ == "__main__":
     main()
